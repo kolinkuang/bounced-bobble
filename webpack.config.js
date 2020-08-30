@@ -1,13 +1,13 @@
-const path = require("path");
+const path = require('path');
 module.exports = {
-    entry: path.resolve(__dirname, "./main.js"),
+    entry: path.resolve(__dirname, './main.js'),
     output: {
-        filename: "bundle.js",
-        path: path.resolve(__dirname, "./dist"),
+        filename: 'bundle.js',
+        path: path.resolve(__dirname, './dist'),
     },
-    devtool: "source-map",
+    devtool: 'source-map',
     devServer: {
-        contentBase: path.resolve(__dirname, "./dist"),
+        contentBase: path.resolve(__dirname, './dist'),
     },
     module: {
         rules: [
@@ -15,10 +15,10 @@ module.exports = {
                 test: /\.(png|jpe?g|gif)$/i,
                 use: [
                     {
-                        loader: "file-loader",
+                        loader: 'file-loader',
                         options: {
-                            outputPath: "assets/",
-                            publicPath: "",
+                            outputPath: 'assets/',
+                            publicPath: '',
                         },
                     },
                 ],
