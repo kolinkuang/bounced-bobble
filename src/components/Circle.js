@@ -33,7 +33,7 @@ function handleBobble() {
         direction: MoveDirection.Right
     });
 
-    const Speed = 3;
+    const Speed = 8;
 
     const Strategies = {
         [MoveDirection.Up](bobbleInfo) {
