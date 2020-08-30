@@ -1,6 +1,6 @@
 import {width, height} from '../constants/Constants';
 
-function isEdgeTouched(bobbleInfo, initState) {
+function isEdgeTouched(bobbleInfo) {
     return bobbleInfo.x <= 0 ||
         bobbleInfo.y <= 0 ||
         bobbleInfo.x + bobbleInfo.width >= width ||

@@ -5,7 +5,7 @@ const Circle = defineComponent({
     setup(props) {
     },
 
-    render(ctx) {
+    render() {
         return h('circle', {x: 0, y: 0});
     }
 
@@ -73,10 +73,18 @@ function handleBobble() {
         ChangeDirectionMap[bobbleInfo.direction](bobbleInfo);
     }
 
+    function handleClick() {
+        console.log('onClick!');
+        const keys = Object.keys(MoveDirection);
+        const index = Math.floor((Math.random() * keys.length))
+        bobbleInfo.direction = MoveDirection[keys[index]];
+    }
+
     return {
         bobbleInfo,
         moveBobble,
-        changeDirection
+        changeDirection,
+        handleClick
     };
 }
 

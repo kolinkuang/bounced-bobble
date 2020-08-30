@@ -6,13 +6,12 @@ import {isEdgeTouched} from '../utils/Algo';
 export default defineComponent({
 
     //vue2 this.$emit
-    setup(props, ctx) {
-        const {bobbleInfo, moveBobble, changeDirection} = handleBobble();
+    setup() {
+        const {bobbleInfo, moveBobble, changeDirection, handleClick} = handleBobble();
 
         function handleTicker() {
             moveBobble(bobbleInfo);
             if (isEdgeTouched(bobbleInfo)) {
-                console.log('hit!!!');
                 changeDirection(bobbleInfo);
             }
         }
@@ -21,7 +20,8 @@ export default defineComponent({
         onUnmounted(() => game.ticker.remove(handleTicker));
 
         return {
-            bobbleInfo
+            bobbleInfo,
+            handleClick
         };
     },
 
@@ -30,7 +30,12 @@ export default defineComponent({
         const {x, y} = ctx.bobbleInfo;
 
         return h('Container', [
-            h(Circle, {x, y})
+            h(Circle, {
+                x,
+                y,
+                interactive: true,
+                onClick: ctx.handleClick
+            })
         ]);
     }
 

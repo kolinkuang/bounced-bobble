@@ -7,7 +7,7 @@ const typeElementMap = {
     circle() {
         let element = new Graphics();
         element.beginFill(0xCAEACE);
-        element.drawCircle(0,0,circleRadius);
+        element.drawCircle(circleRadius, circleRadius, circleRadius);
         element.endFill();
         return element;
     },
@@ -17,6 +17,9 @@ const typeElementMap = {
 };
 
 const patchPropMap = {
+    'onClick'(el, key, nextValue) {
+        el.on('pointertap', nextValue);
+    },
     default(el, key, nextValue) {
         el[key] = nextValue;
     }
@@ -24,7 +27,7 @@ const patchPropMap = {
 
 // 自定义渲染器（可跨平台）
 const renderer = createRenderer({
-    createElement(type, isSVG, isCustomizedBuiltIn) {
+    createElement(type) {
         // 创建元素：将Vue 虚拟 DOM 映射成 pixi.js 的元素
         // create canvas element based on type
         return typeElementMap[type]();
@@ -33,9 +36,9 @@ const renderer = createRenderer({
         // append （创建完元素后，添加进容器）
         parent.addChild(el);
     },
-    patchProp(el, key, prevValue, nextValue, isSVG, prevChildren, parentComponent, parentSuspense, unmountChildren) {
+    patchProp(el, key, prevValue, nextValue) {
         // patch pixi 元素的属性
-        let fn = patchPropMap[key];
+        const fn = patchPropMap[key];
         !!fn ? fn(el, key, nextValue) : patchPropMap.default(el, key, nextValue);
     },
     setElementText(node, text) {
